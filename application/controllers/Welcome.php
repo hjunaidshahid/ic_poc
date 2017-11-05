@@ -35,4 +35,31 @@ class Welcome extends CI_Controller {
 		die;
 		$this->load->view('welcome_message');
 	}
+
+	public function testing_doctrine()
+	{
+		// taking help from it
+		//https://github.com/wildlyinaccurate/CodeIgniter-with-Doctrine-2
+		$this->load->library('doctrine');
+		$group = new Entity\UserGroup;
+		$group->setName('Users');
+
+		$user = new Entity\User;
+		$user->setUsername('wildlyinaccurate');
+		$user->setPassword('Passw0rd');
+		$user->setEmail('wildlyinaccurate@gmail.com');
+		$user->setGroup($group);
+
+		// When you have set up your database, you can persist these entities:
+		//$em = $this->doctrine->em;
+		//$em->persist($group);
+		//$em->persist($user);
+		//$em->flush();
+		//die();
+		$this->load->view('testing_doctrine', array(
+			'user' => $user,
+			'group' => $group,
+		));
+
+	}
 }
